@@ -1,5 +1,5 @@
 package Characters;
 
-public class PersonClass {
+public enum PersonClass {
 
 }
