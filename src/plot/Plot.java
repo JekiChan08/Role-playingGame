@@ -5,7 +5,7 @@ import Characters.Rassa;
 
 import java.util.Scanner;
 
-//Сюжет, не придусал как это реализовать
+//Сюжет
 public class Plot {
     //выбор имени и рассы
     public static void ChoosingRace(MainHero mainHero) {
