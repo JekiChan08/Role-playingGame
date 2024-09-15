@@ -1,7 +1,8 @@
 package Characters;
 
+import item.Weapon;
+
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class MainHero {
     //гг-Главный Герой
@@ -14,6 +15,10 @@ public class MainHero {
     private double damageHero;
     //Защита гг
     private double protectionHero;
+    //Класс персонажа
+    private PersonClass personClass;
+
+    private ArrayList<Weapon> weapons;
 
 
     public Rassa getRassa() {
@@ -25,7 +30,15 @@ public class MainHero {
     }
 
     public MainHero() {
+        this.weapons = new ArrayList<>();
+    }
 
+    public ArrayList<Weapon> getWeapons() {
+        return weapons;
+    }
+
+    public void setWeapons(ArrayList<Weapon> weapons) {
+        this.weapons = weapons;
     }
 
     public String getName() {
@@ -60,4 +73,11 @@ public class MainHero {
         this.health = health;
     }
 
+    public PersonClass getPersonClass() {
+        return personClass;
+    }
+
+    public void setPersonClass(PersonClass personClass) {
+        this.personClass = personClass;
+    }
 }

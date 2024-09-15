@@ -2,13 +2,27 @@ package Characters;
 //Расса-гном, эльф итд
 public enum Rassa {
     //гном
-    DWARF,
+    DWARF("Гном"),
     //эльф
-    ELF,
+    ELF("Эльф"),
     //человек
-    PERSON,
+    PERSON("Человек"),
     //орк
-    ORC;
+    ORC("Орк");
+    private String title;
 
+    Rassa(String title) {
+        this.title = title;
+    }
 
+    Rassa() {
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 }
