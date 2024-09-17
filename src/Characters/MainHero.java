@@ -1,7 +1,6 @@
 package Characters;
 
-import item.Weapon;
-import item.attackItem.Swords;
+import item.Swords;
 
 public class MainHero {
     //гг-Главный Герой
@@ -10,8 +9,6 @@ public class MainHero {
     private Rassa rassa;
     //здоровье гг
     private double health;
-    //Защита гг
-    private double protectionHero;
     //Класс персонажа
     private PersonClass personClass;
     //оружие
@@ -21,7 +18,6 @@ public class MainHero {
 
     public MainHero(){
         this.health = 100;
-        this.protectionHero = 10;
         this.money = 100;
     }
 
@@ -30,13 +26,15 @@ public class MainHero {
         System.out.println("Ваши статы:");
         System.out.println("Здоровье: " + health);
         System.out.println("Урон: " + sword.getDamage());
-        System.out.println("Защита: " + protectionHero);
         System.out.println("Класс: " + personClass.getTitle());
         System.out.println("Деньги: " + getMoney());
     }
 
     public Swords getSword() {
         return sword;
+    }
+    public double getDamage() {
+        return sword.getDamage();
     }
 
     public void setSword(Swords sword) {
@@ -65,14 +63,6 @@ public class MainHero {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public double getProtectionHero() {
-        return protectionHero;
-    }
-
-    public void setProtectionHero(double protectionHero) {
-        this.protectionHero = protectionHero;
     }
 
     public double getHealth() {

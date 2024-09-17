@@ -1,4 +1,4 @@
-package item.attackItem;
+package item;
 
 public enum Swords {
     BASIC_SWORD(5, 0),

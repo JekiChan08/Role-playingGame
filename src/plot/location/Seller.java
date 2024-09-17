@@ -1,7 +1,7 @@
 package plot.location;
 
 import Characters.MainHero;
-import item.attackItem.Swords;
+import item.Swords;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -30,12 +30,13 @@ public class Seller {
         while (endWhile) {
             Scanner sc = new Scanner(System.in);
             System.out.println("Какой меч желаешь?");
-            for (int i = 1; i < swords.size(); i++) {
+            for (int i = 1; i <= swords.size(); i++) {
                 System.out.println(i + ") меч с уроном: " + swords.get(i - 1).getDamage() + " стоит: " + swords.get(i - 1).getPrice());
             }
+            System.out.println((swords.size() + 1) + ") Выйти с Таверны оружия");
             int choiceBuy = sc.nextInt();
             if (choiceBuy <= swords.size()) {
-                for (int i = 1; i < swords.size(); i++) {
+                for (int i = 1; i <= swords.size(); i++) {
                     if (choiceBuy == i) {
                         if (mainHero.getMoney() >= swords.get(i-1).getPrice()) {
                             mainHero.setMoney(mainHero.getMoney() - swords.get(i-1).getPrice());
@@ -47,11 +48,18 @@ public class Seller {
                             break;
                         } else {
                             System.out.println("У тебя не хватает денег, иди в подземелье может там с монстров что то выбьешь");
+                            endWhile = false;
+                            break;
                         }
+                    } else if(swords.size() + 1 <= choiceBuy){
+                        System.out.println("Вы вышли с таверны");
+                        endWhile = false;
+                        break;
                     }
                 }
             } else {
-                System.out.println("таких мечей нету на выбор");
+                endWhile = false;
+                break;
             }
         }
     }

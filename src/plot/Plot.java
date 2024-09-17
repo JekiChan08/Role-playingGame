@@ -10,9 +10,13 @@ import java.util.Scanner;
 public class Plot {
     public static void startingPlot(MainHero mainHero) {
         //начало сюжета
-        Beginning.ChoosingRace(mainHero);
-        if (mainHero.getRassa() == Rassa.PERSON) {
-            EndPerson.start(mainHero);
+        boolean endWhile = true;
+        while (endWhile) {
+            Beginning.ChoosingRace(mainHero);
+            if (mainHero.getRassa() == Rassa.PERSON) {
+                EndPerson.start(mainHero);
+                endWhile = false;
+            }
         }
     }
 }

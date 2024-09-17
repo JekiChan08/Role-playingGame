@@ -14,7 +14,6 @@ public class City{
     public static void start(MainHero mainHero) {
         System.out.println("Добро пожаловать в Город! ");
         choiceCity(mainHero);
-
     }
 
     //список выборов в городе
@@ -24,10 +23,13 @@ public class City{
 
         boolean endWhile = true;
         while (endWhile) {
+
             System.out.println("Что вы хотите сделать?\n" +
                     "1) посмотреть свои статы\n" +
                     "2) пойти в подземелье\n" +
-                    "3) купить оружие\n");
+                    "3) купить оружие\n" +
+                    "--------------------------------------------\n" +
+                    "\n");
             Scanner sc = new Scanner(System.in);
             int choice = sc.nextInt();
             switch (choice) {
@@ -42,6 +44,10 @@ public class City{
                 case 3: {
                     seller.buySword(mainHero);
                 }
+            }
+            if(mainHero.getHealth() <= 0) {
+                System.out.println("Game Over");
+                endWhile = false;
             }
         }
     }
