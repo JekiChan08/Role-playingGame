@@ -3,6 +3,7 @@ package plot;
 import Characters.MainHero;
 import Characters.PersonClass;
 import Characters.Rassa;
+import item.attackItem.Swords;
 
 import java.util.Scanner;
 //начало сюжета
@@ -83,6 +84,23 @@ public class Beginning {
                     System.out.println("Такого класса нет, выберите то что предложено");
                     break;
                 }
+            }
+        }
+        endWhile = true;
+        while (endWhile) {
+            if (mainHero.getPersonClass() == PersonClass.WARRIOR) {
+                System.out.println("Вам выдаеться базовай меч!");
+                mainHero.setSword(Swords.BASIC_SWORD);
+                endWhile = false;
+
+            } else if (mainHero.getPersonClass() == PersonClass.MAG) {
+                System.out.println("Вам выдаеться базовай гримуар!");
+                endWhile = false;
+
+            }else if (mainHero.getPersonClass() == PersonClass.TANK) {
+                System.out.println("Вам выдаеться базовай щит!");
+                endWhile = false;
+
             }
         }
 

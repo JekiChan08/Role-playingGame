@@ -1,8 +1,7 @@
 package Characters;
 
 import item.Weapon;
-
-import java.util.ArrayList;
+import item.attackItem.Swords;
 
 public class MainHero {
     //гг-Главный Герой
@@ -11,15 +10,38 @@ public class MainHero {
     private Rassa rassa;
     //здоровье гг
     private double health;
-    //урон гг
-    private double damageHero;
     //Защита гг
     private double protectionHero;
     //Класс персонажа
     private PersonClass personClass;
+    //оружие
+    private Swords sword;
+    //деньги
+    private double money;
 
-    private ArrayList<Weapon> weapons;
+    public MainHero(){
+        this.health = 100;
+        this.protectionHero = 10;
+        this.money = 100;
+    }
 
+    //все статы
+    public void getStats() {
+        System.out.println("Ваши статы:");
+        System.out.println("Здоровье: " + health);
+        System.out.println("Урон: " + sword.getDamage());
+        System.out.println("Защита: " + protectionHero);
+        System.out.println("Класс: " + personClass.getTitle());
+        System.out.println("Деньги: " + getMoney());
+    }
+
+    public Swords getSword() {
+        return sword;
+    }
+
+    public void setSword(Swords sword) {
+        this.sword = sword;
+    }
 
     public Rassa getRassa() {
         return rassa;
@@ -29,16 +51,12 @@ public class MainHero {
         this.rassa = rassa;
     }
 
-    public MainHero() {
-        this.weapons = new ArrayList<>();
+    public double getMoney() {
+        return money;
     }
 
-    public ArrayList<Weapon> getWeapons() {
-        return weapons;
-    }
-
-    public void setWeapons(ArrayList<Weapon> weapons) {
-        this.weapons = weapons;
+    public void setMoney(double money) {
+        this.money = money;
     }
 
     public String getName() {
@@ -47,14 +65,6 @@ public class MainHero {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public double getDamageHero() {
-        return damageHero;
-    }
-
-    public void setDamageHero(double damageHero) {
-        this.damageHero = damageHero;
     }
 
     public double getProtectionHero() {
