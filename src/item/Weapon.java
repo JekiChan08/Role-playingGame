@@ -1,27 +1,37 @@
 package item;
-//Оружие
-public  class Weapon {
-    //значение которое даёт оружие, если оружие на урон то дает плюс урон, если поддешка то здоровье, если защитный то защиту
-    private double value;
-    //Вид урона
+
+public enum Weapon {
+    SWORD(10, 100, TypeDamage.PHYSICAL),
+    GREAMUAR(10, 100, TypeDamage.MAGICAL);
+
+    private double damage;
+    private double price;
     private TypeDamage typeDamage;
 
-    public Weapon() {
-    }
 
-    public TypeDamage getTypeDamage() {
-        return typeDamage;
-    }
-
-    public void setTypeDamage(TypeDamage typeDamage) {
+    Weapon(double damage, double price, TypeDamage typeDamage) {
+        this.damage = damage;
+        this.price = price;
         this.typeDamage = typeDamage;
     }
 
-    public double getValue() {
-        return value;
+    Weapon(double damage) {
+        this.damage = damage;
     }
 
-    public void setValue(double value) {
-        this.value = value;
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public double getDamage() {
+        return damage;
+    }
+
+    public void setDamage(double damage) {
+        this.damage = damage;
     }
 }
