@@ -4,6 +4,7 @@ import Characters.MainHero;
 import plot.Plot;
 import plot.endings.Dungeon;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 //город
@@ -23,31 +24,35 @@ public class City{
 
         boolean endWhile = true;
         while (endWhile) {
-
-            System.out.println("Что вы хотите сделать?\n" +
-                    "1) посмотреть свои статы\n" +
-                    "2) пойти в подземелье\n" +
-                    "3) купить оружие\n" +
-                    "--------------------------------------------\n" +
-                    "\n");
-            Scanner sc = new Scanner(System.in);
-            int choice = sc.nextInt();
-            switch (choice) {
-                case 1: {
-                    mainHero.getStats();
-                    break;
+            try {
+                System.out.println("Что вы хотите сделать?\n" +
+                        "1) посмотреть свои статы\n" +
+                        "2) пойти в подземелье\n" +
+                        "3) купить оружие\n" +
+                        "--------------------------------------------\n" +
+                        "\n");
+                Scanner sc = new Scanner(System.in);
+                int choice = sc.nextInt();
+                switch (choice) {
+                    case 1: {
+                        mainHero.getStats();
+                        break;
+                    }
+                    case 2: {
+                        dungeon.start(mainHero);
+                        break;
+                    }
+                    case 3: {
+                        seller.buySword(mainHero);
+                        break;
+                    }
                 }
-                case 2: {
-                    dungeon.start(mainHero);
-                    break;
+                if (mainHero.getHealth() <= 0) {
+                    System.out.println("Game Over");
+                    endWhile = false;
                 }
-                case 3: {
-                    seller.buySword(mainHero);
-                }
-            }
-            if(mainHero.getHealth() <= 0) {
-                System.out.println("Game Over");
-                endWhile = false;
+            }catch (InputMismatchException e) {
+                System.out.println("Нельзя писать что то другое кроме целочисленных цифер");
             }
         }
     }

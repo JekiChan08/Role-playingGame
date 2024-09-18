@@ -1,28 +1,21 @@
 package item;
 
-public enum Swords {
-    BASIC_SWORD(5, 0),
-    SWORD10(10, 100),
-    SWORD20(20, 200),
-    SWORD30(30, 300),
-    SWORD40(40, 400),
-    SWORD50(50, 500),
-    SWORD60(60, 600),
-    SWORD70(70, 700),
-    SWORD80(80, 800),
-    SWORD90(90, 900),
-    SWORD100(100, 1000);
+public enum Weapon {
+    SWORD(10, 100, TypeDamage.PHYSICAL),
+    GREAMUAR(10, 100, TypeDamage.MAGICAL);
 
     private double damage;
     private double price;
+    private TypeDamage typeDamage;
 
 
-    Swords(double damage, double price) {
+    Weapon(double damage, double price, TypeDamage typeDamage) {
         this.damage = damage;
         this.price = price;
+        this.typeDamage = typeDamage;
     }
 
-    Swords(double damage) {
+    Weapon(double damage) {
         this.damage = damage;
     }
 

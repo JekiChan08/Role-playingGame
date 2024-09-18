@@ -4,6 +4,7 @@ import Characters.Enemies;
 import Characters.MainHero;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -34,25 +35,31 @@ public class Dungeon {
         System.out.println("уровень подземелья: " + level);
         boolean endWhile = true;
         while (endWhile) {
-            switch (choiceDungeon()) {
-                case 1: {
-                    battle(mainHero);
+            try {
+                switch (choiceDungeon()) {
+                    case 1: {
+                        battle(mainHero);
+                        break;
+                    }
+                    case 2: {
+                        mainHero.getStats();
+                    }
+                    default: {
+                        endWhile = false;
+                        break;
+                    }
+                }
+                if (mainHero.getHealth() <= 0) {
                     endWhile = false;
-                    break;
-                } case 2: {
-                    mainHero.getStats();
-                } default:
-                    endWhile = false; break;
-            }
-            if (mainHero.getHealth() <= 0) {
-                endWhile = false;
+                }
+            }catch (InputMismatchException e) {
+                System.out.println("Нельзя писать что то другое кроме целочисленных цифер");
             }
         }
     }
     public void battle(MainHero mainHero) {
         boolean endWhile = true;
-
-        double health = 20;
+        double health;
         double damage;
         if (level >= 1) {
             damage = 10 * level;
@@ -61,7 +68,10 @@ public class Dungeon {
             damage = 7;
             health = 17;
         }
+
         while (endWhile) {
+
+
             Random rn = new Random();
             Enemies enRn = enemies.get(rn.nextInt(0, enemies.size()));
 
@@ -78,21 +88,21 @@ public class Dungeon {
             switch (choice) {
                 case 1 : {
                     health -= mainHero.getDamage();
-                    if (mainHero.getHealth() <= 0) {
-                        endWhile = true;
-                    }
                     if (health <= 0 ) {
                         System.out.println("Вы убили " + enRn.getName() + "!");
                         level += 1;
                         mainHero.setMoney(mainHero.getMoney() + enRn.getMany());
                         System.out.println("Вы получили деньги в сумме: " + enRn.getMany());
                         endWhile = false;
+                        break;
                     } else {
                         mainHero.setHealth(mainHero.getHealth() - damage);
+                        break;
                     }
-                } case 2: {
+                } default: {
                     System.out.println("Вы вышли с подземелья");
                     endWhile = false;
+                    break;
                 }
             }
             if (mainHero.getHealth() <= 0) {

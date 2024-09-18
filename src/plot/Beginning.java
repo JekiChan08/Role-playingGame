@@ -3,7 +3,7 @@ package plot;
 import Characters.MainHero;
 import Characters.PersonClass;
 import Characters.Rassa;
-import item.Swords;
+import item.Weapon;
 
 import java.util.Scanner;
 //начало сюжета
@@ -19,7 +19,9 @@ public class Beginning {
             mainHero.setName(name);
 
             boolean endWhile = true;
+
             while (endWhile) {
+
                 System.out.println("Здравствуйте " + mainHero.getName() + ", выберите рассу написав число:\n" +
                         "1) Человек\n" +
                         "2) Гном\n" +
@@ -61,8 +63,7 @@ public class Beginning {
             while (endWhile) {
                 System.out.println(mainHero.getName() + " Выберете класс для вашего персонажа: \n" +
                         "1) воин\n" +
-                        "2) маг\n" +
-                        "3) танк\n");
+                        "2) маг\n");
                 int classPerson = sc.nextInt();
                 switch (classPerson) {
                     case 1: {
@@ -77,12 +78,12 @@ public class Beginning {
                         endWhile = false;
                         break;
                     }
-                    case 3: {
-                        mainHero.setPersonClass(PersonClass.TANK);
-                        System.out.println("Теперь вы: " + mainHero.getPersonClass().getTitle());
-                        endWhile = false;
-                        break;
-                    }
+//                    case 3: {
+//                        mainHero.setPersonClass(PersonClass.TANK);
+//                        System.out.println("Теперь вы: " + mainHero.getPersonClass().getTitle());
+//                        endWhile = false;
+//                        break;
+//                    }
                     default: {
                         System.out.println("Такого класса нет, выберите то что предложено");
                         break;
@@ -93,21 +94,21 @@ public class Beginning {
             while (endWhile) {
                 if (mainHero.getPersonClass() == PersonClass.WARRIOR) {
                     System.out.println("Вам выдаеться базовай меч!");
-                    mainHero.setSword(Swords.BASIC_SWORD);
+                    mainHero.setWeapon(Weapon.SWORD);
                     endWhile = false;
                     whileBeginning = false;
 
                 } else if (mainHero.getPersonClass() == PersonClass.MAG) {
                     System.out.println("Вам выдаеться базовай гримуар!");
+                    mainHero.setWeapon(Weapon.GREAMUAR);
                     endWhile = false;
                     whileBeginning = false;
-
-
-                } else if (mainHero.getPersonClass() == PersonClass.TANK) {
-                    System.out.println("Вам выдаеться базовай щит!");
-                    endWhile = false;
-                    whileBeginning = false;
-
+//                } else if (mainHero.getPersonClass() == PersonClass.TANK) {
+//                    System.out.println("Вам выдаеться базовай щит!");
+//                    mainHero.setWeapon();
+//                    endWhile = false;
+//                    whileBeginning = false;
+//
 
                 }
             }

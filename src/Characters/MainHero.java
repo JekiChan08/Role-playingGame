@@ -1,6 +1,9 @@
 package Characters;
 
-import item.Swords;
+import item.Items;
+import item.Weapon;
+
+import java.util.ArrayList;
 
 public class MainHero {
     //гг-Главный Герой
@@ -12,33 +15,45 @@ public class MainHero {
     //Класс персонажа
     private PersonClass personClass;
     //оружие
-    private Swords sword;
+    private Weapon weapon;
     //деньги
     private double money;
 
+    private ArrayList<Items> items;
+
     public MainHero(){
         this.health = 100;
-        this.money = 100;
+        this.money = 50;
+        items = new ArrayList<>();
     }
 
     //все статы
     public void getStats() {
         System.out.println("Ваши статы:");
         System.out.println("Здоровье: " + health);
-        System.out.println("Урон: " + sword.getDamage());
+        System.out.println("Урон: " + weapon.getDamage());
         System.out.println("Класс: " + personClass.getTitle());
         System.out.println("Деньги: " + getMoney());
     }
 
-    public Swords getSword() {
-        return sword;
-    }
-    public double getDamage() {
-        return sword.getDamage();
+    public ArrayList<Items> getItems() {
+        return items;
     }
 
-    public void setSword(Swords sword) {
-        this.sword = sword;
+    public void setItems(ArrayList<Items> items) {
+        this.items = items;
+    }
+
+    public Weapon getWeapon() {
+        return weapon;
+    }
+
+    public double getDamage() {
+        return weapon.getDamage();
+    }
+
+    public void setWeapon(Weapon weapon) {
+        this.weapon = weapon;
     }
 
     public Rassa getRassa() {
