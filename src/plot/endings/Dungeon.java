@@ -2,118 +2,18 @@ package plot.endings;
 
 import Characters.Enemies;
 import Characters.MainHero;
-
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
-//подземелье
 public class Dungeon {
-    //уровень
     private int level;
-
     private ArrayList<Enemies> enemies;
-
-
-    public int choiceDungeon() {
-        System.out.println("Выберите что хитоте сделать:\n" +
-                "1) Пойти сражаться\n" +
-                "2) Проверить свои статы\n" +
-                "любое) Выйти с подземелья");
-        Scanner sc = new Scanner(System.in);
-        int choice = sc.nextInt();
-        if(choice <= 2) {
-            return choice;
-        }else System.out.println("Такого выбора нету");
-        return 3;
-    }
-
-
-    public void start(MainHero mainHero) {
-        System.out.println("Вы вошли в подземелье");
-        System.out.println("уровень подземелья: " + level);
-        boolean endWhile = true;
-        while (endWhile) {
-            try {
-                switch (choiceDungeon()) {
-                    case 1: {
-                        battle(mainHero);
-                        break;
-                    }
-                    case 2: {
-                        mainHero.getStats();
-                    }
-                    default: {
-                        endWhile = false;
-                        break;
-                    }
-                }
-                if (mainHero.getHealth() <= 0) {
-                    endWhile = false;
-                }
-            }catch (InputMismatchException e) {
-                System.out.println("Нельзя писать что то другое кроме целочисленных цифер");
-            }
-        }
-    }
-    public void battle(MainHero mainHero) {
-        boolean endWhile = true;
-        double health;
-        double damage;
-        if (level >= 1) {
-            damage = 10 * level;
-            health = 20 * level;
-        }else {
-            damage = 7;
-            health = 17;
-        }
-
-        while (endWhile) {
-
-
-            Random rn = new Random();
-            Enemies enRn = enemies.get(rn.nextInt(0, enemies.size()));
-
-            System.out.println("Вы встретили монстра: " + enRn.getName());
-            System.out.println("Если вы удрите " + enRn.getName() + " то он начнёт атаковать");
-            System.out.println("Ваши действия?\n" +
-                    "1) Ударить - ваш урон: " + mainHero.getDamage() + "\n" +
-                    "   Ваше здоровье: " + mainHero.getHealth() + "\n" +
-                    "   Урон врага: " + damage + "\n" +
-                    "   HP врага: " + health + "\n"+
-                    "2) выйти с подземелья");
-            Scanner sc = new Scanner(System.in);
-            int choice = sc.nextInt();
-            switch (choice) {
-                case 1 : {
-                    health -= mainHero.getDamage();
-                    if (health <= 0 ) {
-                        System.out.println("Вы убили " + enRn.getName() + "!");
-                        level += 1;
-                        mainHero.setMoney(mainHero.getMoney() + enRn.getMany());
-                        System.out.println("Вы получили деньги в сумме: " + enRn.getMany());
-                        endWhile = false;
-                        break;
-                    } else {
-                        mainHero.setHealth(mainHero.getHealth() - damage);
-                        break;
-                    }
-                } default: {
-                    System.out.println("Вы вышли с подземелья");
-                    endWhile = false;
-                    break;
-                }
-            }
-            if (mainHero.getHealth() <= 0) {
-                endWhile = false;
-            }
-        }
-    }
-
+    private Scanner sc = new Scanner(System.in);
 
     public Dungeon() {
-        this.level = 0;
+        this.level = 1;
         enemies = new ArrayList<>();
         enemies.add(Enemies.SKELETON);
         enemies.add(Enemies.SPIDER);
@@ -126,6 +26,137 @@ public class Dungeon {
         enemies.add(Enemies.CYCLOPS);
     }
 
+    public int choiceDungeon() {
+        System.out.println("Выберите действие:\n" +
+                "1) Пойти сражаться\n" +
+                "2) Проверить свои статы\n" +
+                "3) Улучшить оружие (100 монет)\n" +
+                "4) Улучшить защиту (150 монет)\n" +
+                "5) Использовать зелье (50 монет, восстанавливает 50 HP)\n" +
+                "любое другое) Выйти из игры");
+        try {
+            return sc.nextInt();
+        } catch (InputMismatchException e) {
+            System.out.println("Некорректный ввод! Введите число.");
+            sc.nextLine();
+            return 0;
+        }
+    }
+
+    public void start(MainHero mainHero) {
+        System.out.println("Вы вошли в подземелье");
+        boolean inDungeon = true;
+
+        while (inDungeon) {
+            System.out.println("Текущий уровень подземелья: " + level);
+            switch (choiceDungeon()) {
+                case 1 -> battle(mainHero); // Начать битву
+                case 2 -> mainHero.getStats(); // Посмотреть статы героя
+                case 3 -> upgradeWeapon(mainHero); // Улучшить оружие
+                case 4 -> upgradeArmor(mainHero); // Улучшить броню
+                case 5 -> usePotion(mainHero); // Использовать зелье
+                default -> {
+                    System.out.println("Вы вышли из игры.");
+                    inDungeon = false;
+                }
+            }
+            if (mainHero.getHealth() <= 0) {
+                System.out.println("Вы погибли! Игра окончена.");
+                inDungeon = false;
+            }
+        }
+    }
+
+    public void battle(MainHero mainHero) {
+        Random rn = new Random();
+        Enemies enemy = enemies.get(rn.nextInt(enemies.size()));
+
+        double enemyHealth = 45 + (level * 10);
+        double enemyDamage = 6.2 + (level * 3);
+        boolean inBattle = true;
+
+        System.out.println("Вы встретили врага: " + enemy.getName());
+        System.out.println("Урон врага: " + enemyDamage + ", Здоровье врага: " + enemyHealth);
+
+        while (inBattle) {
+            System.out.println("\nВаши действия:\n" +
+                    "1) Атаковать (ваш урон: " + mainHero.getDamage() + ")\n" +
+                    "2) Использовать зелье (восстановить 50 HP)\n" +
+                    "3) Сбежать из битвы");
+
+            try {
+                int choice = sc.nextInt();
+                switch (choice) {
+                    case 1 -> {
+                        enemyHealth -= mainHero.getDamage();
+                        if (enemyHealth <= 0) {
+                            System.out.println("Вы победили " + enemy.getName() + "!");
+                            levelUp(mainHero, enemy);
+                            inBattle = false;
+                        } else {
+                            enemyAttack(mainHero, enemyDamage);
+                            if (mainHero.getHealth() <= 0) {
+                                System.out.println("Вы погибли в бою.");
+                                inBattle = false;
+                            }
+                        }
+                    }
+                    case 2 -> usePotion(mainHero);
+                    case 3 -> {
+                        System.out.println("Вы сбежали из битвы.");
+                        inBattle = false;
+                    }
+                    default -> System.out.println("Некорректный выбор.");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Некорректный ввод! Введите число.");
+                sc.nextLine();
+            }
+        }
+    }
+
+    private void enemyAttack(MainHero mainHero, double enemyDamage) {
+        double damage = enemyDamage * (1 - mainHero.getArmor().getDefense() / 100.0);
+        mainHero.setHealth(mainHero.getHealth() - damage);
+        System.out.println("Враг атакует и наносит вам " + damage + " урона.");
+    }
+
+    private void levelUp(MainHero mainHero, Enemies enemy) {
+        level++;
+        mainHero.setMoney(mainHero.getMoney() + enemy.getMany());
+        System.out.println("Вы получили " + enemy.getMany() + " монет. Всего денег: " + mainHero.getMoney());
+    }
+
+    public void upgradeWeapon(MainHero mainHero) {
+        if (mainHero.getMoney() >= 100) {
+            mainHero.setMoney(mainHero.getMoney() - 100);
+            mainHero.setWeapon(mainHero.getWeapon().upgradeWeapon());
+            System.out.println("Вы улучшили оружие! Новый урон: " + mainHero.getDamage());
+        } else {
+            System.out.println("Недостаточно монет для улучшения оружия.");
+        }
+    }
+
+    public void upgradeArmor(MainHero mainHero) {
+        if (mainHero.getMoney() >= 150) {
+            mainHero.setMoney(mainHero.getMoney() - 150);
+            mainHero.upgradeArmor(10);
+            System.out.println("Вы улучшили броню! Новая защита: " + mainHero.getArmor().getDefense() + "%");
+        } else {
+            System.out.println("Недостаточно монет для улучшения брони.");
+        }
+    }
+
+    public void usePotion(MainHero mainHero) {
+        if (mainHero.getMoney() >= 50) {
+            mainHero.setMoney(mainHero.getMoney() - 50);
+            mainHero.setHealth(mainHero.getHealth() + 50);
+            System.out.println("Вы использовали зелье и восстановили 50 HP. Ваше здоровье: " + mainHero.getHealth());
+        } else {
+            System.out.println("Недостаточно монет для зелья.");
+        }
+    }
+
     public int getLevel() {
         return level;
     }
@@ -133,4 +164,5 @@ public class Dungeon {
     public void setLevel(int level) {
         this.level = level;
     }
+
 }

@@ -1,22 +1,18 @@
 package item;
 
 public enum Weapon {
-    SWORD(10, 100, TypeDamage.PHYSICAL),
-    GREAMUAR(10, 100, TypeDamage.MAGICAL);
+    SWORD(10, 150, TypeDamage.PHYSICAL),
+    GREAMUAR(10, 150, TypeDamage.MAGICAL);
 
     private double damage;
     private double price;
     private TypeDamage typeDamage;
-
+    private static final double UPGRADE_MULTIPLIER = 1.5; // Коэффициент улучшения урона
 
     Weapon(double damage, double price, TypeDamage typeDamage) {
         this.damage = damage;
         this.price = price;
         this.typeDamage = typeDamage;
-    }
-
-    Weapon(double damage) {
-        this.damage = damage;
     }
 
     public double getPrice() {
@@ -33,5 +29,24 @@ public enum Weapon {
 
     public void setDamage(double damage) {
         this.damage = damage;
+    }
+
+    public TypeDamage getTypeDamage() {
+        return typeDamage;
+    }
+
+    public void setTypeDamage(TypeDamage typeDamage) {
+        this.typeDamage = typeDamage;
+    }
+
+    public Weapon upgradeWeapon() {
+        this.damage *= UPGRADE_MULTIPLIER;
+        System.out.println("Ваше оружие было улучшено. Новый урон: " + this.damage);
+        return this;
+    }
+
+    @Override
+    public String toString() {
+        return name() + " (Урон: " + damage + ", Тип урона: " + typeDamage + ")";
     }
 }

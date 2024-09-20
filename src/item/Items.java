@@ -1,18 +1,16 @@
 package item;
 
 public enum Items {
-    SHIELD("(Щит) защитный предмет который позволяет онулировать некоторый урон", 5, TypeItems.PROTECTION, 100),
-    POLITION_LIFE("(Зелье жизни) дает некоторое количество здоровья", 50, TypeItems.BUFF, 50);
+    SHIELD("(Щит) защитный предмет который позволяет онулировать некоторый урон", 5,100),
+    POLITION_LIFE("(Зелье жизни) дает некоторое количество здоровья", 50, 50);
 
     private String description;
     private double value;
-    private TypeItems typeItems;
     private double price;
 
-    Items(String description, double value, TypeItems typeItems, double price) {
+    Items(String description, double value, double price) {
         this.description = description;
         this.value = value;
-        this.typeItems = typeItems;
         this.price = price;
     }
 
@@ -40,11 +38,4 @@ public enum Items {
         this.value = value;
     }
 
-    public TypeItems getTypeItems() {
-        return typeItems;
-    }
-
-    public void setTypeItems(TypeItems typeItems) {
-        this.typeItems = typeItems;
-    }
 }
