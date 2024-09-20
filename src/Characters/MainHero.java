@@ -1,39 +1,36 @@
 package Characters;
 
+import item.Armor;
 import item.Items;
 import item.Weapon;
 
 import java.util.ArrayList;
 
 public class MainHero {
-    //гг-Главный Герой
     private String name;
-    //расса гг
-    private Rassa rassa;
-    //здоровье гг
-    private double health;
-    //Класс персонажа
-    private PersonClass personClass;
-    //оружие
-    private Weapon weapon;
-    //деньги
-    private double money;
+    private Rassa rassa;// Раса героя
+    private double health;// Здоровье героя
+    private PersonClass personClass;// Класс героя
+    private Weapon weapon;// Оружие героя
+    private Armor armor;// Броня героя
+    private double money;// Деньги
+    private ArrayList<Items> items;// Предметы
 
-    private ArrayList<Items> items;
-
-    public MainHero(){
+    public MainHero() {
         this.health = 100;
-        this.money = 50;
+        this.money = 0;
+        this.armor = new Armor("Начальная броня", 20);  // Начальная броня с 20% защитой
         items = new ArrayList<>();
     }
 
-    //все статы
+    // Метод для вывода всех статов героя
     public void getStats() {
         System.out.println("Ваши статы:");
         System.out.println("Здоровье: " + health);
         System.out.println("Урон: " + weapon.getDamage());
         System.out.println("Класс: " + personClass.getTitle());
-        System.out.println("Деньги: " + getMoney());
+        System.out.println("Деньги: " + money);
+        System.out.println("Броня: " + armor);
     }
 
     public ArrayList<Items> getItems() {
@@ -56,12 +53,20 @@ public class MainHero {
         this.weapon = weapon;
     }
 
-    public Rassa getRassa() {
-        return rassa;
+    public Armor getArmor() {
+        return armor;
     }
 
-    public void setRassa(Rassa rassa) {
-        this.rassa = rassa;
+    public void setArmor(Armor armor) {
+        this.armor = armor;
+    }
+
+    public double getHealth() {
+        return health;
+    }
+
+    public void setHealth(double health) {
+        this.health = health;
     }
 
     public double getMoney() {
@@ -80,12 +85,12 @@ public class MainHero {
         this.name = name;
     }
 
-    public double getHealth() {
-        return health;
+    public Rassa getRassa() {
+        return rassa;
     }
 
-    public void setHealth(double health) {
-        this.health = health;
+    public void setRassa(Rassa rassa) {
+        this.rassa = rassa;
     }
 
     public PersonClass getPersonClass() {
@@ -94,5 +99,9 @@ public class MainHero {
 
     public void setPersonClass(PersonClass personClass) {
         this.personClass = personClass;
+    }
+
+    public void upgradeArmor(int increase) {
+        this.armor.upgradeDefense(increase);
     }
 }

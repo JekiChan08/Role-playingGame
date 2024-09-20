@@ -6,7 +6,8 @@ import Characters.Rassa;
 import item.Weapon;
 
 import java.util.Scanner;
-//начало сюжета
+
+
 public class Beginning {
     //выбор имени рассы и класса
     public static void ChoosingRace(MainHero mainHero) {
@@ -78,12 +79,6 @@ public class Beginning {
                         endWhile = false;
                         break;
                     }
-//                    case 3: {
-//                        mainHero.setPersonClass(PersonClass.TANK);
-//                        System.out.println("Теперь вы: " + mainHero.getPersonClass().getTitle());
-//                        endWhile = false;
-//                        break;
-//                    }
                     default: {
                         System.out.println("Такого класса нет, выберите то что предложено");
                         break;
@@ -103,13 +98,6 @@ public class Beginning {
                     mainHero.setWeapon(Weapon.GREAMUAR);
                     endWhile = false;
                     whileBeginning = false;
-//                } else if (mainHero.getPersonClass() == PersonClass.TANK) {
-//                    System.out.println("Вам выдаеться базовай щит!");
-//                    mainHero.setWeapon();
-//                    endWhile = false;
-//                    whileBeginning = false;
-//
-
                 }
             }
         }
